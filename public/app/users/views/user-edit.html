@@ -1,34 +1,34 @@
 <form class="form" ng-submit="saveUser()" name="user-form" novalidate>
-    <div class="form-group">
-        <label for="first-name">First name</label>
-        <input class="form-control" id="first-name" ng-model="user.firstName" type="text" required>
+  <div class="form-group">
+    <label for="first-name">First name</label>
+    <input class="form-control" id="first-name" ng-model="user.firstName" type="text" required>
+  </div>
+  <div class="form-group">
+    <label for="last-name">Last name</label>
+    <input class="form-control" id="last-name" ng-model="user.lastName" type="text" required>
+  </div>
+  <div class="form-group">
+    <label>Gender</label>
+    <div class="radio">
+      <label>
+        <input type="radio" id="male" value="male" ng-model="user.gender" required>
+        Male
+      </label>
     </div>
-    <div class="form-group">
-        <label for="last-name">Last name</label>
-        <input class="form-control" id="last-name" ng-model="user.lastName" type="text" required>
+    <div class="radio">
+      <label>
+        <input type="radio" id="female" value="female" ng-model="user.gender" required>
+        Female
+      </label>
     </div>
-    <div class="form-group">
-        <label>Gender</label>
-        <div class="radio">
-            <label>
-                <input type="radio" id="male" value="male" ng-model="user.gender" required>
-                Male
-            </label>
-        </div>
-        <div class="radio">
-            <label>
-                <input type="radio" id="female" value="female" ng-model="user.gender" required>
-                Female
-            </label>
-        </div>
-    </div>
-    <div class="form-group">
-        <label for="role">Role</label>
-        <select ng-model="user.role" class="form-control" id="role">
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-        </select>
-    </div>
-    <button class="btn btn-primary">Save</button>
-    <button class="btn btn-danger" ng-show="canDeleteUser()" ng-click="deleteUser()">Delete</button>
+  </div>
+  <div class="form-group">
+    <label for="role">Role</label>
+    <select ng-model="user.role" class="form-control" id="role">
+      <option value="user">User</option>
+      <option value="admin">Admin</option>
+    </select>
+  </div>
+  <button class="btn btn-primary">Save</button>
+  <button class="btn btn-danger" ng-show="canDeleteUser()" ng-click="deleteUser()">Delete</button>
 </form>

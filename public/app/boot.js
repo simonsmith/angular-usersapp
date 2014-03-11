@@ -4,10 +4,10 @@ angular.module('app.home');
 
 
 angular.module('app', [
-    'app.users',
-    'app.home',
-    'app.filters',
-    'ngResource',
-    'ngRoute'
+  'app.users',
+  'app.home',
+  'app.filters',
+  'ngResource',
+  'ngRoute'
 ]);
 
