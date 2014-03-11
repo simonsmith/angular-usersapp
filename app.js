@@ -39,6 +39,7 @@ app.get('/users', function(req, res) {
   users.find({}, {
       firstName: 1,
       lastName: 1,
+      role: 1,
       _id: 1
     },
     function(err, users) {
