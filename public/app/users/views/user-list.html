@@ -1,0 +1,9 @@
+
+<ul class="UserList list-group">
+    <li class="UserList-item list-group-item" ng-repeat="user in users">
+        <a ng-href="#/users/{{ user._id }}">{{ user.firstName }} {{ user.lastName }}</a>
+        <a class="pull-right" ng-href="#/users/edit/{{ user._id }}">Edit</a>
+    </li>
+</ul>
+
+<p><a href="#/users/new">Create new user</a></p>
