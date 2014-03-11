@@ -1,9 +1,8 @@
 var express = require('express');
-var swig = require('swig');
+var swig    = require('swig');
 var mongojs = require('mongojs');
 
 var db = mongojs('mongodb://localhost/usersapp');
-
 var users = db.collection('users');
 var app = express();
 
@@ -17,20 +16,14 @@ app.configure('development', function() {
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
-
 app.use(express.json());
-app.use(express.urlencoded());
 app.use('/public', express.static(process.cwd() + '/public'));
-
-app.use(express.cookieParser());
-app.use(express.methodOverride());
-
 app.use(app.router);
 
 app.set('port', process.env.PORT || 5200);
 app.listen(app.get('port'));
 
-console.log('App running');
+console.log('App running on ' + app.get('port'));
 
 app.get('/', function(req, res) {
   res.render('index');
@@ -67,7 +60,6 @@ app.put('/users/:id', function(req, res) {
   users.update({
     '_id': mongojs.ObjectId(req.params.id)
   }, req.body, function(err) {
-    console.log(arguments);
     res.send(204);
   });
 });
