@@ -1,7 +1,8 @@
 angular.module('app.users')
   .controller('UsersNewController', function($scope, $routeParams, $location, UserService) {
     $scope.saveUser = function() {
-      UserService.save($scope.user);
-
+      UserService.save($scope.user, function() {
+        $location.path('/users');
+      });
     };
   });
