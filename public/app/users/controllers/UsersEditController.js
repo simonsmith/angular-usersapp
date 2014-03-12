@@ -1,5 +1,5 @@
 angular.module('app.users')
-  .controller('UsersEditController', function($scope, $routeParams, $location, UserService) {
+  .controller('UsersEditController', function($scope, $routeParams, $window, UserService) {
     if (angular.isString($routeParams.userId)) {
       $scope.user = UserService.get({
         'id': $routeParams.userId
@@ -9,12 +9,8 @@ angular.module('app.users')
     $scope.saveUser = function() {
       UserService.update({
         id: $routeParams.userId
-      }, $scope.user);
-    };
-
-    $scope.deleteUser = function() {
-      UserService.delete({
-        id: $routeParams.userId
+      }, $scope.user, function() {
+        $window.history.back();
       });
-    }
+    };
   });

@@ -1,14 +1,13 @@
 angular.module('app.filters', []);
-angular.module('app.users');
-angular.module('app.home');
+angular.module('app.users', ['ngRoute', 'ui.bootstrap']);
+angular.module('app.home', ['ngRoute']);
 
 
 angular.module('app', [
   'app.users',
   'app.home',
   'app.filters',
-  'ngResource',
-  'ngRoute'
+  'ngResource'
 ]);
 
 
@@ -39,7 +38,18 @@ angular.module('app.home').config(function($routeProvider) {
 });
 
 angular.module('app.users')
-  .controller('UsersEditController', function($scope, $routeParams, $location, UserService) {
+  .controller('UsersDeleteController', function($scope, user, UserService) {
+    $scope.deleteUser = function() {
+      UserService.delete({
+        'id': user._id
+      }, function() {
+        $scope.$close();
+      });
+    };
+  });
+
+angular.module('app.users')
+  .controller('UsersEditController', function($scope, $routeParams, $window, UserService) {
     if (angular.isString($routeParams.userId)) {
       $scope.user = UserService.get({
         'id': $routeParams.userId
@@ -49,14 +59,10 @@ angular.module('app.users')
     $scope.saveUser = function() {
       UserService.update({
         id: $routeParams.userId
-      }, $scope.user);
-    };
-
-    $scope.deleteUser = function() {
-      UserService.delete({
-        id: $routeParams.userId
+      }, $scope.user, function() {
+        $window.history.back();
       });
-    }
+    };
   });
 
 angular.module('app.users')
@@ -67,8 +73,9 @@ angular.module('app.users')
 angular.module('app.users')
   .controller('UsersNewController', function($scope, $routeParams, $location, UserService) {
     $scope.saveUser = function() {
-      UserService.save($scope.user);
-
+      UserService.save($scope.user, function() {
+        $location.path('/users');
+      });
     };
   });
 
@@ -77,6 +84,32 @@ angular.module('app.users')
     $scope.user = UserService.get({
       'id': $routeParams.userId
     });
+  });
+
+angular.module('app.users')
+  .directive('confirmDelete', function() {
+    return {
+      restrict: 'A',
+      scope: true,
+      controller: function($scope, $modal) {
+        $scope.confirmDelete = function() {
+          var modal = $modal.open({
+            templateUrl: '/public/app/users/views/modal-delete.html',
+            scope: $scope,
+            controller: 'UsersDeleteController',
+            resolve: {
+              user: function() {
+                return $scope.user;
+              }
+            }
+          });
+
+          modal.result.then(function() {
+            $scope.users.splice($scope.users.indexOf($scope.user), 1);
+          });
+        };
+      }
+    }
   });
 
 angular.module('app.users').config(function($routeProvider) {
@@ -100,8 +133,8 @@ angular.module('app.users').config(function($routeProvider) {
 });
 
 angular.module('app.users')
-    .factory('UserService', function($resource) {
-        return $resource('/users/:id', {}, {
-            update: { method: 'PUT' }
-        });
+  .factory('UserService', function($resource) {
+    return $resource('/users/:id', {}, {
+      update: { method: 'PUT' }
     });
+  });

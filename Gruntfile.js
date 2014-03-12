@@ -12,7 +12,7 @@ module.exports = function(grunt) {
   grunt.config('watch', {
     scripts: {
       files: '<%= dirs.app %>/**/*.js',
-      tasks: ['concat'],
+      tasks: ['concat:app'],
       options: {
         spawn: false
       }
@@ -26,11 +26,9 @@ module.exports = function(grunt) {
         '<%= dirs.vendor %>/angular/angular.js': [
           '<%= dirs.bower %>/angular/angular.js',
           '<%= dirs.bower %>/angular-route/angular-route.js',
-          '<%= dirs.bower %>/angular-resource/angular-resource.js'
-        ],
-
-        // Lodash
-        '<%= dirs.vendor %>/lodash/lodash.js': '<%= dirs.bower %>/dist/lodash.js'
+          '<%= dirs.bower %>/angular-resource/angular-resource.js',
+          '<%= dirs.bower %>/angular-bootstrap/ui-bootstrap-tpls.js'
+        ]
       }
     },
     bootstrap: {
