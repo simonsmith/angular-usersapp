@@ -1,8 +1,24 @@
-<ul class="UserList list-group">
-  <li class="UserList-item list-group-item" ng-repeat="user in users">
-    <a ng-href="#/users/{{ user._id }}">{{ user.firstName }} {{ user.lastName }}</a>
-    <a class="pull-right" ng-href="#/users/edit/{{ user._id }}">Edit</a>
-  </li>
-</ul>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>Role</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.lastName }}</td>
+      <td>{{ user.role | capitalise }}</td>
+      <td>
+        <a class="btn btn-xs btn-default" ng-href="#/users/{{ user._id }}">View</a>
+        <a class="btn btn-xs btn-default" ng-href="#/users/edit/{{ user._id }}">Edit</a>
+        <a class="btn btn-xs btn-danger" confirm-delete ng-click="confirmDelete()">Delete</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-<p><a href="#/users/new">Create new user</a></p>
+<p><a class="btn btn-primary" href="#/users/new">Create new user</a></p>
