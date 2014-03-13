@@ -19,6 +19,7 @@ describe('UsersEditController', function() {
     controllerConfig = {
       $scope: $scope,
       $routeParams: { userId: 12345 },
+      $window: $window,
       UserService: UserService
     };
   }));
