@@ -18,13 +18,12 @@ describe('UsersNewController', function() {
 
     controllerConfig = {
       $scope: $scope,
-      $routeParams: { userId: 12345 },
       $location: $location,
       UserService: UserService
     };
   }));
 
-  describe('Editing a single user', function() {
+  describe('Creating a new user', function() {
     beforeEach(function() {
       spyOn(UserService, 'save').and.callThrough();
       spyOn($location, 'path');
