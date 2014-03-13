@@ -57,7 +57,6 @@ app.get('/users/:id', function(req, res) {
 });
 
 app.put('/users/:id', function(req, res) {
-
   users.update({
     '_id': mongojs.ObjectId(req.params.id)
   }, req.body, function(err) {

@@ -2,12 +2,11 @@ describe('UsersListController', function() {
   beforeEach(module('app.users'));
 
   var UsersListController,
-      $controller,
-      $httpBackend,
       $scope,
+      $httpBackend,
+      $controller,
       UserService,
       controllerConfig;
-
 
   beforeEach(inject(function(_$controller_, $rootScope, _$httpBackend_, _UserService_) {
     $scope = $rootScope.$new();
