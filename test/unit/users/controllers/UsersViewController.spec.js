@@ -32,12 +32,12 @@ describe('UsersViewController', function() {
     });
 
     it('should assign the user to the scope', function() {
-      $httpBackend.expectGET('/users/12345').respond(200, { _id: 12345 });
+      $httpBackend.expectGET('/users/12345').respond(200, { id: 12345 });
       UsersViewController = $controller('UsersViewController', controllerConfig);
       $httpBackend.flush();
 
       expect(UserService.get).toHaveBeenCalledWith({ id: 12345 });
-      expect($scope.user._id).toBe(12345);
+      expect($scope.user.id).toBe(12345);
     });
   });
 });
