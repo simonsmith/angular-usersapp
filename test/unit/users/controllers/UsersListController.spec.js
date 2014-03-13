@@ -1,14 +1,14 @@
 describe('UsersListController', function() {
   beforeEach(module('app.users'));
 
-  var UsersListController, scope;
+  var UsersListController, $scope;
   var UserServiceSpy = jasmine.createSpyObj('UserService', ['query']);
 
   beforeEach(inject(function($controller, $rootScope) {
-    scope = $rootScope.$new();
+    $scope = $rootScope.$new();
 
     UsersListController = $controller('UsersListController', {
-      $scope: scope,
+      $scope: $scope,
       UserService: UserServiceSpy
     });
   }));
