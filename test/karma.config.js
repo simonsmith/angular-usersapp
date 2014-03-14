@@ -20,16 +20,22 @@ module.exports = function(config) {
       'test/unit/**/*.spec.js'
     ],
 
+    preprocessors: {
+      // source files, that you wanna generate coverage for
+      // do not include tests or libraries
+      // (these files will be instrumented by Istanbul)
+      'public/app/**/*.js': ['coverage']
+    },
 
-    // list of files to exclude
-    exclude: [
-
-    ],
-
+    coverageReporter: {
+      type: 'text',
+      dir: '',
+      file: ''
+    },
 
     // test results reporter to use
     // possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
-    reporters: ['progress'],
+    reporters: ['progress', 'coverage'],
 
 
     // web server port
