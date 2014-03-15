@@ -30,9 +30,6 @@ angular.module('app.home').config(function($routeProvider) {
         .when('/', {
             controller: 'HomeController',
             templateUrl: '/public/app/home/views/home.html'
-        })
-        .otherwise({
-            redirectTo: '/'
         });
 });
 
@@ -126,6 +123,9 @@ angular.module('app.users').config(function($routeProvider) {
     .when('/users/:userId', {
       controller: 'UsersViewController',
       templateUrl: '/public/app/users/views/user-view.html'
+    })
+    .otherwise({
+      redirectTo: '/users'
     });
 });
 

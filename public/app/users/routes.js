@@ -15,5 +15,8 @@ angular.module('app.users').config(function($routeProvider) {
     .when('/users/:userId', {
       controller: 'UsersViewController',
       templateUrl: '/public/app/users/views/user-view.html'
+    })
+    .otherwise({
+      redirectTo: '/users'
     });
 });
