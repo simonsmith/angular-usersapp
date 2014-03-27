@@ -20,19 +20,6 @@ angular.module('app.filters').filter('capitalise', function() {
     };
 });
 
-angular.module('app.home')
-  .controller('HomeController', function($scope) {
-    $scope.test = 'Hello'
-  });
-
-angular.module('app.home').config(function($routeProvider) {
-    $routeProvider
-        .when('/', {
-            controller: 'HomeController',
-            templateUrl: '/public/app/home/views/home.html'
-        });
-});
-
 angular.module('app.users')
   .controller('UsersDeleteController', function($scope, user, UserService) {
     $scope.deleteUser = function() {
