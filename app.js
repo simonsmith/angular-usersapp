@@ -10,13 +10,12 @@ app.configure('development', function() {
   swig.setDefaults({ cache: false });
   app.set('showStackError', true);
   app.use(express.logger({
-    format: ':response-time ms - :date - :req[x-real-ip] - :method :url :user-agent / :referrer'
+    format: ':response-time ms - :date - :method :url | :referrer'
   }));
 });
 
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
-app.use(express.json());
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use(app.router);
 
