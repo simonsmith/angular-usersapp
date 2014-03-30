@@ -17,6 +17,8 @@ app.configure('development', function() {
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html');
 app.use('/public', express.static(process.cwd() + '/public'));
+app.use(express.json());
+app.use(express.urlencoded());
 app.use(app.router);
 
 app.set('port', process.env.PORT || 5200);
