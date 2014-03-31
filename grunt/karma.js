@@ -5,6 +5,9 @@ module.exports = function(grunt) {
     },
     once: {
       singleRun: true
+    },
+    unit: {
+      autoWatch: true
     }
   });
 

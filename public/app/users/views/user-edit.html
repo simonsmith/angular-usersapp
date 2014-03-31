@@ -1,33 +1,41 @@
-<form class="form" ng-submit="saveUser()" name="user-form" novalidate>
-  <div class="form-group">
+<form class="form" ng-submit="saveUser(userForm.$invalid)" name="userForm" novalidate>
+
+  <div class="form-group" ng-class="{ 'has-error' : userForm.firstName.$invalid && userForm.firstName.$dirty }">
     <label for="first-name">First name</label>
-    <input class="form-control" id="first-name" ng-model="user.firstName" type="text" required>
+    <input class="form-control" id="first-name" ng-model="user.firstName" type="text" name="firstName" required>
+    <span class="help-block" ng-show="userForm.firstName.$invalid && userForm.firstName.$dirty">A first name is required</span>
   </div>
-  <div class="form-group">
+
+  <div class="form-group" ng-class="{ 'has-error' : userForm.lastName.$invalid && userForm.lastName.$dirty }">
     <label for="last-name">Last name</label>
-    <input class="form-control" id="last-name" ng-model="user.lastName" type="text" required>
+    <input class="form-control" id="last-name" ng-model="user.lastName" type="text" name="lastName" required>
+    <span class="help-block" ng-show="userForm.lastName.$invalid && userForm.lastName.$dirty">A last name is required</span>
   </div>
+
   <div class="form-group">
     <label>Gender</label>
     <div class="radio">
       <label>
-        <input type="radio" id="male" value="male" ng-model="user.gender" required>
+        <input type="radio" id="male" value="male" ng-model="user.gender" name="gender" required>
         Male
       </label>
     </div>
     <div class="radio">
       <label>
-        <input type="radio" id="female" value="female" ng-model="user.gender" required>
+        <input type="radio" id="female" value="female" ng-model="user.gender" name="gender" required>
         Female
       </label>
     </div>
+    <span class="help-block" ng-show="userForm.gender">A gender is required</span>
   </div>
+
   <div class="form-group">
     <label for="role">Role</label>
-    <select ng-model="user.role" class="form-control" id="role">
+    <select ng-model="user.role" class="form-control" id="role" name="role" required>
       <option value="user">User</option>
       <option value="admin">Admin</option>
     </select>
   </div>
-  <button class="btn btn-primary">Save</button>
+
+  <button class="btn btn-primary" ng-disabled="userForm.$invalid">Save</button>
 </form>
