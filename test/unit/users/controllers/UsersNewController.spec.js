@@ -7,7 +7,7 @@ describe('UsersNewController', function() {
     $scope,
     $location,
     UserService,
-    controllerConfig;
+    createController;
 
   beforeEach(inject(function(_$controller_, $rootScope, _$location_, _$httpBackend_, _UserService_) {
     $scope = $rootScope.$new();
@@ -16,10 +16,12 @@ describe('UsersNewController', function() {
     $controller = _$controller_;
     UserService = _UserService_;
 
-    controllerConfig = {
-      $scope: $scope,
-      $location: $location,
-      UserService: UserService
+    createController = function() {
+      return $controller('UsersNewController', {
+        $scope: $scope,
+        $location: $location,
+        UserService: UserService
+      });
     };
   }));
 
@@ -31,7 +33,7 @@ describe('UsersNewController', function() {
 
     it('should save the new user', function() {
       $httpBackend.expectPOST('/users').respond(201);
-      UsersNewController = $controller('UsersNewController', controllerConfig);
+      createController();
 
       $scope.user = {
         name: 'Simon'

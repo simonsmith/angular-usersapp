@@ -6,7 +6,7 @@ describe('UsersDeleteController', function() {
     $httpBackend,
     $scope,
     UserService,
-    controllerConfig;
+    createController;
 
   beforeEach(inject(function(_$controller_, $rootScope, _$httpBackend_, _UserService_) {
     $scope = $rootScope.$new();
@@ -14,10 +14,12 @@ describe('UsersDeleteController', function() {
     $controller = _$controller_;
     UserService = _UserService_;
 
-    controllerConfig = {
-      $scope: $scope,
-      user: { _id: 12345 },
-      UserService: UserService
+    createController = function() {
+      return $controller('UsersDeleteController', {
+        $scope: $scope,
+        user: { _id: 12345 },
+        UserService: UserService
+      });
     };
   }));
 
@@ -27,7 +29,7 @@ describe('UsersDeleteController', function() {
       $scope.$close = jasmine.createSpy('$close');
 
       $httpBackend.expectDELETE('/users/12345').respond(200);
-      UsersDeleteController = $controller('UsersDeleteController', controllerConfig);
+      createController();
     });
 
     it('should delete the user', function() {

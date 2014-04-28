@@ -7,7 +7,7 @@ describe('UsersEditController', function() {
       $scope,
       $window,
       UserService,
-      controllerConfig;
+      createController;
 
   beforeEach(inject(function(_$controller_, $rootScope, _$window_, _$httpBackend_, _UserService_) {
     $scope = $rootScope.$new();
@@ -16,11 +16,13 @@ describe('UsersEditController', function() {
     $controller = _$controller_;
     UserService = _UserService_;
 
-    controllerConfig = {
-      $scope: $scope,
-      $routeParams: { userId: 12345 },
-      $window: $window,
-      UserService: UserService
+    createController = function() {
+      return $controller('UsersEditController', {
+        $scope: $scope,
+        $routeParams: { userId: 12345 },
+        $window: $window,
+        UserService: UserService
+      });
     };
   }));
 
@@ -33,7 +35,7 @@ describe('UsersEditController', function() {
 
     it('should assign the user to the scope', function() {
       $httpBackend.expectGET('/users/12345').respond(200, { id: 12345 });
-      UsersEditController = $controller('UsersEditController', controllerConfig);
+      createController();
       $httpBackend.flush();
 
       expect(UserService.get).toHaveBeenCalledWith({ id: 12345 });
@@ -43,7 +45,7 @@ describe('UsersEditController', function() {
     it('should update a user when saved', function() {
       $httpBackend.whenGET('/users/12345').respond(200);
       $httpBackend.expectPUT('/users/12345', { name: 'Simon' }).respond(204);
-      UsersEditController = $controller('UsersEditController', controllerConfig);
+      createController();
 
       $scope.user = {
         name: 'Simon'

@@ -6,7 +6,7 @@ describe('UsersListController', function() {
       $httpBackend,
       $controller,
       UserService,
-      controllerConfig;
+      createController;
 
   beforeEach(inject(function(_$controller_, $rootScope, _$httpBackend_, _UserService_) {
     $scope = $rootScope.$new();
@@ -14,9 +14,11 @@ describe('UsersListController', function() {
     $controller = _$controller_;
     UserService = _UserService_;
 
-    controllerConfig = {
-      $scope: $scope,
-      UserService: UserService
+    createController = function() {
+      return $controller('UsersListController', {
+        $scope: $scope,
+        UserService: UserService
+      });
     };
   }));
 
@@ -27,7 +29,7 @@ describe('UsersListController', function() {
 
     it('should assign the users to the scope', function() {
       $httpBackend.expectGET('/users').respond(200, [{id: '1'}]);
-      UsersListController = $controller('UsersListController', controllerConfig);
+      createController();
       $httpBackend.flush();
 
       expect(UserService.query).toHaveBeenCalled();
